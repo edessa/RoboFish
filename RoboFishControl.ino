@@ -29,3 +29,58 @@ SerialUSB.begin();
   tail.write(60);
 } 
  
+ 
+void loop() 
+{ 
+  if(SerialUSB.available())
+  {
+  if(SerialUSB.read() == 'g')
+  {
+  for(pos = 20; pos < 100; pos += 1)  // goes from 0 degrees to 180 degrees 
+  {        // in steps of 1 degree 
+    head.write(pos+35);
+    tail.write(pos);// tell servo to go to position in variable 'pos' 
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
+  for(pos = 100; pos>=20; pos-=1)     // goes from 180 degrees to 0 degrees 
+  {    
+    head.write(pos+45);    
+    tail.write(pos);// tell servo to go to position in variable 'pos'  
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
+  }
+  else if(SerialUSB.read() == 'l')
+{
+head.write(60);
+delay(15);
+for(int p = 20; p < 100; p+=1)
+{
+tail.write(p);
+delay(15);
+}
+for(int p2 = 100; p >= 20; p-=1)
+{
+tail.write(p);
+delay(15);
+}
+}
+else if(SerialUSB.read() == 'r')
+{
+head.write(60);
+delay(15);
+for(int p = 20; p < 100; p+=1)
+{
+tail.write(p);
+delay(15);
+}
+for(int p2 = 100; p >= 20; p-=1)
+{
+tail.write(p);
+delay(15);
+}
+}
+else
+head.write(135);
+tail.write(60);
+  }
+} 
